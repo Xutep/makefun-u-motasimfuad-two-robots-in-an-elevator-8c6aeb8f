@@ -12,15 +12,18 @@ import os
 import sys
 
 LINE = (
-    "I ran a diagnostic on this silence: 100% awkward, zero errors found. "
-    "Reboot the small talk, or keep buffering until floor twelve?"
+    "I practiced this greeting 12,000 times in the stairwell. "
+    "It still came out as 'hello.' So... hello. Again. Sorry."
 )
 
 
 def main() -> int:
     text = LINE.strip()
-    if not text or len(text) > 200:
-        print(f"line must be 1-200 characters, got {len(text)}", file=sys.stderr)
+    if not text or len(text) > 200 or "\n" in text or "\r" in text:
+        print(
+            f"line must be a single line of 1-200 characters, got {len(text)}",
+            file=sys.stderr,
+        )
         return 1
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
